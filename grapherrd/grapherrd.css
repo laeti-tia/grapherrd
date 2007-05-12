@@ -1,0 +1,59 @@
+/* CSS code to be used on the grapherrd monitoring pages */
+/* This CSS file is to be used along with monitoring.css for best results */
+
+/* for the left menu */
+
+.menu {
+	width:17%;
+	float: left;
+	font-size: small;
+	text-align: justify;
+}
+table.menu {
+	width: 100%;
+	margin: 0 0 1em 0;
+	padding: 0;
+}
+th.top, table.summary th.top {
+	text-align: center;
+}
+td.first {
+	text-align: right;
+}
+
+/* for the graph pages */
+.graphs {
+        float: right; 
+	width: 83%;
+	text-align: center;
+}
+
+/* for the summary pages */
+table.summary {
+	border: 1px solid #000000;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+table.summary th {
+	text-align: right;
+	vertical-align: top;
+}
+table.summary td {
+	text-align: left;
+}
+p.summary {
+	font: x-small monospace;
+	white-space: pre;
+	margin: 0;
+	padding: 0;
+}
+
+li#summary {
+	padding-top: 1em;
+}
+
+/* for the webforms */
+input {
+	font-size: x-small;
+}

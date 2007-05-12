@@ -124,7 +124,9 @@ if ($nsd_pid != 0 || defined $opt{nsd}) {
 			usage;
 			exit(1);
 		} else {
+			# We need access to rndc output
 			$ndc = "rndc";
+			#$ndc = "sudo -u bind rndc";
 		}
 		close (NDC);
 	}
@@ -156,6 +158,7 @@ if (/^total/ || /^success/ || /^direct/ || /^recursive/ || /^failure/ || /^all/)
 		# default stat file for BIND is set as /tmp/named.stats
 		$stat_file = defined $opt{statfile} ? $opt{statfile} : '/tmp/named.stats';
 		system("rm -f $stat_file") == 0 
+		#system("sudo -u bind rm -f $stat_file") == 0 
 			or die "Couldn't call rm";
 	} else {
 		# default stat file for NSD is set as /var/log/daemon.log (Debian package standard)
