@@ -1,0 +1,55 @@
+
+=============
+= GrapheRRD =
+=============
+
+GrapheRRD is a PHP web frontend to MRTG  and  RRD  data  files.   It  draws
+custom graphics from MRTG data and  allows  easy  navigation  amongst  data
+sources.   Graphs  colors,  sizes  and   time   scale   are   customizable.
+
+Source code is under the GPL (see enclosed LICENSE file).
+
+== Requirements ==
+MRTG, RRD, PHP.
+
+== Installation ==
+Installation should  be  quite  straighforward.   The  grapherrd  directory
+contains all the needed PHP scripts.  You should copy it  to  any  of  your
+HTTP PHP enabled server.
+
+snmpd-helper directory contains bash  scripts  to  be  run  from  snmpd  to
+collect services statistics and make them available to MRTG.   Scripts  are
+provided for the following services:
+- DB (mysql)
+- DNS (bind and NSD)
+- FTP (apache and proftpd)
+- HTTP (apache)
+- NNTP (INN)
+- SMTP (postfix)
+
+== Configuration ==
+Configuration is  done  in  3  different  places:  MRTG,  graperrd.cfg  and
+graph.cfg
+
+=== MRTG ===
+Regular MRTG configuration files should be set so to use the RRD backend.
+
+=== grapherrd.cfg ===
+The grapherrd.cfg file contains all the settings you can  change  to  adapt
+the output and rendering of the GrapheRRD web pages.  You should also  tell
+GrapheRRD where to look for MRTG configuration files, RRD  data  files  and
+where to output graphic files produced.  See comments enclosed in the  file
+for more information.
+
+=== graph.cfg ===
+This file contains  all  the  graphs  definitions:  data  sources,  colors,
+legends.  There is already quite a lot of different  graph  types  provided
+and adding new ones should be quite easy.  See  comments  enclosed  in  the
+file
+
+== Acknowledgements ==
+Thanks to BELNET http://www.belnet.be for having made this work  opensource
+software.
+
+
+/* vim: set expandtab textwidth=75: */

@@ -11,6 +11,8 @@
 # - opentables		number of open tables
 # - all			output of all values, one per line
 #
+# Copyright Antoine Delvaux 2002 - 2007
+#
 #  * This program is free software; you can redistribute it and/or
 #  * modify it under the terms of the GNU General Public License
 #  * as published by the Free Software Foundation; either version 2

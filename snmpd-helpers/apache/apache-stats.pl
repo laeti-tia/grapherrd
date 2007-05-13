@@ -19,13 +19,7 @@
 # - idle		number of idle apache processes
 # - all			output of all values, one per line
 #
-# History:
-#	19/09/2005	Antoine Delvaux
-#			- call 'apachectl fullstatus' to circumvent awk call
-#	22/04/2005	Antoine Delvaux
-#			- support for all values output in a single run
-#	19/11/2003	Antoine Delvaux
-#			- created
+# Copyright Antoine Delvaux 2002-2007
 #
 #  * This program is free software; you can redistribute it and/or
 #  * modify it under the terms of the GNU General Public License

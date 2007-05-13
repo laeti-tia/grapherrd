@@ -4,6 +4,8 @@
 # The statistics are collected by the update-mailstats.pl daemon
 # running in the background and stored in a Berkeley DB file
 #
+# Copyright Antoine Delvaux 2002-2007
+#
 #  * This program is free software; you can redistribute it and/or
 #  * modify it under the terms of the GNU General Public License
 #  * as published by the Free Software Foundation; either version 2

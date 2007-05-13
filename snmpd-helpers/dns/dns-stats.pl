@@ -14,17 +14,7 @@
 # counters so it shouldn't be take into the total account.
 # See: http://marc.theaimsgroup.com/?l=bind9-users&m=103238038914431
 #
-# History:
-#	11/05/2005	1.4	Antoine Delvaux
-#		- added all option to get all result in one run
-#	21/10/2004	1.3	Antoine Delvaux
-#		- added compatibility with NSD
-#	26/01/2004	1.2	Antoine Delvaux
-#		- added autodetection of named version
-#	19/01/2004	1.1	Antoine Delvaux
-#		- added BIND 8 support
-#       12/01/2004	1.0	Antoine Delvaux
-#		- first version
+# Copyright Antoine Delvaux 2002-2007
 #
 #  * This program is free software; you can redistribute it and/or
 #  * modify it under the terms of the GNU General Public License

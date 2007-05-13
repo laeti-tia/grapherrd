@@ -1,8 +1,7 @@
 /* CSS code to be used on the grapherrd monitoring pages */
 /* This CSS file is to be used along with monitoring.css for best results */
 
-/* for the left menu */
-
+/* left menu */
 .menu {
 	width:17%;
 	float: left;
@@ -21,14 +20,14 @@ td.first {
 	text-align: right;
 }
 
-/* for the graph pages */
+/* graph pages */
 .graphs {
         float: right; 
 	width: 83%;
 	text-align: center;
 }
 
-/* for the summary pages */
+/* summary pages */
 table.summary {
 	border: 1px solid #000000;
 	width: 100%;

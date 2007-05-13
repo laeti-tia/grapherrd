@@ -1,9 +1,33 @@
 <?PHP
+/******************************************************************************
+ * menu.php
+ * Copyright Antoine Delvaux
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA,
+ * or go to http://www.gnu.org/copyleft/gpl.html
+ ******************************************************************************/
+/******************************************************************************
+ * This file control the vertical navigation menu.
+ * 
+ * It's building the HTML menu layout and creating links from the configuration
+ * object. 
+ ******************************************************************************/
 
 print "<div class=\"menu\" id=\"grapherrd\">\n";
 
 // -- Are we in a private page ?
-
 if (preg_match("/^\/private\//", $REQUEST_URI)) {
   $private = true;
 } else {
@@ -11,7 +35,6 @@ if (preg_match("/^\/private\//", $REQUEST_URI)) {
 }
 
 // --- Title
-
 if (empty($HTTP_GET_VARS["page"])) {
   print "<h1>".$cfg->title."</h1>\n";
 } else {
@@ -24,7 +47,6 @@ $target = $HTTP_GET_VARS["target"];
 
 
 // ---  Time scale
-
 print "<h2>Time scale</h2>\n";
 print "<ul>\n";
 $links = array (
@@ -51,7 +73,6 @@ print "</ul>\n";
 
 
 // --- MRTG Files or Targets inside an MRTG file
-
 if (empty($HTTP_GET_VARS["page"])) {
   // -- No MRTG file is selected
   print "<h2>Pages</h2>\n";
@@ -101,7 +122,6 @@ if (empty($HTTP_GET_VARS["page"])) {
 $target = $HTTP_GET_VARS["target"];
 
 // --- Sizes
-
 print "<h2>Sizes</h2>\n";
 print "<ul>\n";
 $links = array (
@@ -129,7 +149,6 @@ foreach ($links as $key => $link_name) {
 print "</ul>\n";
 
 // --- Peaks & Limits
-
 if (!empty($HTTP_GET_VARS["target"])) {
   if ($HTTP_GET_VARS["target"]!="summary") {
     print "<h2>Peaks &amp;<br />Vertical Scales</h2>\n";
@@ -174,3 +193,4 @@ print "<p>If you want to have your browser remembering the graph and size parame
 print $cfg->menu_footer;
 print "\n</div>\n";
 ?>
+
