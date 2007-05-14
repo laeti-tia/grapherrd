@@ -153,7 +153,7 @@ if (!empty($HTTP_GET_VARS["target"])) {
   if ($HTTP_GET_VARS["target"]!="summary") {
     print "<h2>Peaks &amp;<br />Vertical Scales</h2>\n";
     print "<form action=\"grapherrd.php\" method=\"get\">\n";
-    print "<p>";
+    print "<div>";
     foreach ($HTTP_GET_VARS as $key => $value) {
       if (!empty($cfg->targets[$target]["rrd"])) {
 	if (empty($cfg->targets[$target]["rrd"][$key]) && (!preg_match("/^nopk/", $key))) {
@@ -161,7 +161,7 @@ if (!empty($HTTP_GET_VARS["target"])) {
 	}
       }
     }
-    print "</p>";
+    print "</div>";
     print "<table class=\"menu\">\n";
     print "<tr><th class=\"top\">graph</th><th class=\"top\">scale</th><th class=\"top\">no pk</th></tr>\n";
     if (!empty($cfg->targets[$target]["rrd"])) {
