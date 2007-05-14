@@ -13,7 +13,7 @@ Source code is under the GPL (see enclosed LICENSE file).
 MRTG, RRD, PHP.
 
 == Installation ==
-Installation should  be  quite  straighforward.   The  grapherrd  directory
+Installation should be  quite  straightforward.   The  grapherrd  directory
 contains all the needed PHP scripts.  You should copy it  to  any  of  your
 HTTP PHP enabled server.
 
