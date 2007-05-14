@@ -52,7 +52,7 @@ print "</head>\n";
 print "<body>\n";
 
 // include the header
-print "<div class=\"header\">\n";
+print "<div id=\"header\">\n";
 if (preg_match("/^http:\/\//", $cfg->header)) {
 	include($cfg->header);
 } else {
@@ -66,7 +66,7 @@ include("menu.php");
 include("page.php");
 
 // add footer
-print "<div class=\"footer\">\n";
+print "<div id=\"footer\">\n";
 $mtime = microtime();
 $mtime = explode(" ",$mtime);
 $mtime = $mtime[1] + $mtime[0];

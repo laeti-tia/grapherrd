@@ -26,7 +26,7 @@
  ******************************************************************************/
 require("graph.php");
 
-print "<div class=\"graphs\">\n";
+print "<div id=\"page\">\n";
 
 if (!empty($HTTP_GET_VARS["page"])) {
   $target_cfg_file = $HTTP_GET_VARS["page"];
@@ -55,7 +55,7 @@ if (!empty($HTTP_GET_VARS["target"])) {
     // --- print the title and the index
     print "<h1>".$cfg->targets[$target]["title"]." graphs</h1>\n";
     if (!empty($cfg->targets[$target]["rrd"])) {
-      print "<p class=\"index\">- ";
+      print "<p id=\"pageindex\">- ";
       foreach ($cfg->targets[$target]["rrd"] as $type => $rrd) {
 	foreach ($cfg->t_name as $ct => $name) {
 	  if (preg_match("/^".$ct."/", $type)) {

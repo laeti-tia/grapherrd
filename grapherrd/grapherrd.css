@@ -1,58 +1,101 @@
 /* CSS code to be used on the grapherrd monitoring pages */
 /* This CSS file is to be used along with monitoring.css for best results */
 
-/* left menu */
-.menu {
-	width:17%;
-	float: left;
-	font-size: small;
-	text-align: justify;
+/* Links */
+a:link {
+  color: #990033;
+  background: #FFFFFF;
+}
+h1 a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: #000000;
+  background: #FFFFFF;
+}
+
+a:hover {
+  text-decoration: none;
+}
+h1 a:hover {
+  text-decoration: underline;
+}
+
+/* Left menu */
+#menu {
+  width: 17%;
+  float: left;
+  font-size: small;
+  text-align: justify;
 }
 table.menu {
-	width: 100%;
-	margin: 0 0 1em 0;
-	padding: 0;
+  width: 100%;
+  margin: 0 0 1em 0;
+  padding: 0;
 }
 th.top, table.summary th.top {
-	text-align: center;
+  text-align: center;
 }
 td.first {
-	text-align: right;
+  text-align: right;
 }
 
-/* graph pages */
-.graphs {
-        float: right; 
-	width: 83%;
-	text-align: center;
+/* Graph pages */
+#page {
+  float: right; 
+  width: 83%;
+  text-align: center;
+  font-size: small;
 }
 
-/* summary pages */
+/* Summary pages */
+table.graph h3 {
+  margin: 0;
+}
 table.summary {
-	border: 1px solid #000000;
-	width: 100%;
-	margin: 0;
-	padding: 0;
+  border: 1px solid #000000;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 table.summary th {
-	text-align: right;
-	vertical-align: top;
+  text-align: right;
+  vertical-align: top;
 }
 table.summary td {
-	text-align: left;
+  text-align: left;
 }
-p.summary {
-	font: x-small monospace;
-	white-space: pre;
-	margin: 0;
-	padding: 0;
+p.summary, p#pageindex {
+  font: x-small monospace;
+  white-space: pre;
+  margin: 0;
+  padding: 0;
 }
 
 li#summary {
-	padding-top: 1em;
+  padding-top: 1em;
 }
 
-/* for the webforms */
+/* Webforms */
 input {
-	font-size: x-small;
+  font-size: x-small;
+}
+
+/* Footer */
+#menufooter {
+  text-align: center; 
+  padding-top: 2em;
+}
+#footer {
+  clear: both;
+  width: 50em;
+  text-align: center; 
+  padding-top: 5em;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: small;
+}
+#footer p {
+  margin: 0;
 }

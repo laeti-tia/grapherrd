@@ -25,7 +25,7 @@
  * object. 
  ******************************************************************************/
 
-print "<div class=\"menu\" id=\"grapherrd\">\n";
+print "<div id=\"menu\">\n";
 
 // -- Are we in a private page ?
 if (preg_match("/^\/private\//", $REQUEST_URI)) {
