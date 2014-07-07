@@ -34,7 +34,7 @@
 class config 
 {
   //---Constants
-  var $version = "0.9.6 (07/2004)";
+  var $version = "0.9.7 (07/2014)";
 
   //---Properties
   // Configuration parameters
@@ -70,7 +70,8 @@ class config
     if ($fh = fopen ($grapherrd_cfg, "r")) {
       while (!feof($fh)) {
 	$line = fgets($fh, 4096);
-	if (preg_match("/^#/", $line)) {
+	trim($line);
+	if (preg_match("@^((#|//).*|)$@", $line)) {
 	  // --- skip comments
 	  continue;
 	}
@@ -104,7 +105,8 @@ class config
     if ($fh = fopen ($graph_cfg, "r")) {
       while (!feof($fh)) {
 	$line = fgets($fh, 4096);
-	if (preg_match("/#/", $line)) {
+	trim($line);
+	if (preg_match("@^((#|//).*|)$@", $line)) {
 	  // --- skip comments
 	  continue;
 	}
@@ -116,18 +118,8 @@ class config
 	  $par_graph = preg_split("/~/", $parameters[0]);
 	  // --- delete new line character at the end
 	  $parameters[1] = str_replace ("\n", "", $parameters[1]);
-	  // --- replace all '\' by '\\'
-	  $parameters[1] = str_replace ("\\", "\\\\", $parameters[1]);
-	  // --- replace all '(' by '\('
-	  $parameters[1] = str_replace ("(", "\(", $parameters[1]);
-	  // --- replace all '%' by '\%'
-	  $parameters[1] = str_replace ("%", "\%", $parameters[1]);
-	  // --- replace all ')' by '\)'
-	  $parameters[1] = str_replace (")", "\)", $parameters[1]);
 	  // --- replace all ':' by '\:'
-	  $parameters[1] = str_replace (":", "\\\\:", $parameters[1]);
-	  // --- replace all ' ' by '\ '
-	  $parameters[1] = str_replace (" ", "\ ", $parameters[1]);
+	  $parameters[1] = str_replace (":", "\\:", $parameters[1]);
 	  $this->{$par_graph[0]}[$par_graph[1]] = $parameters[1];
 	}
 	//	print $parameters[0];
@@ -142,7 +134,7 @@ class config
    * Type:     	public
    * Args:     	$type		type of the fixed argument
    *	       	$val		value of the fixed argument
-   *	       	$Var_Array	HTTP_GET_VARS array
+   *	       	$Var_Array	_GET array
    * Returns:  	the argument string
    **********************************************************************/ 
   function buildRequestString($type, $val, $Vars_Array) {
@@ -193,15 +185,15 @@ class config
       if ($fh = fopen($this->paths[$i].$cfg_file, "r")) {
 	while (!feof($fh)) {
 	  $line = fgets($fh, 4096);
-	  $line = trim($line);
-	  if ($line{0} == "#") {
+	  trim($line);
+	  if (preg_match("@^((#|//).*|)$@", $line)) {
 	    continue;
 	  }
 
 	  // --- WorkDir
 	  $parameters = preg_split("/^WorkDir:\s*/",$line);
 	  if ($parameters[1] != "") {
-	    $workdir = $parameters[1];
+	    $workdir = trim($parameters[1]);
 	    if (strrpos($workdir, "/") != strlen($workdir)-1) {
 	      $workdir .= "/";
 	    }
@@ -228,7 +220,7 @@ class config
 	    // --- default values
 	    if (preg_match("/^Directory\[.+\]:/", $line)) {
 	      // --- Directory
-	      $default['dir'] = $workdir.$parameters[1];
+	      $default['dir'] = $workdir.trim($parameters[1]);
 	      if (strrpos($default['dir'], "/") != strlen($default['dir'])-1) {
 		$default['dir'] .= "/";
 	      }

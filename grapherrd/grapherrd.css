@@ -1,6 +1,10 @@
 /* CSS code to be used on the grapherrd monitoring pages */
 /* This CSS file is to be used along with monitoring.css for best results */
 
+/* Body */
+body {
+  font-family: Arial, Geneva, sans-serif;
+}
 /* Links */
 a:link {
   color: #990033;

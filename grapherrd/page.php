@@ -28,23 +28,23 @@ require("graph.php");
 
 print "<div id=\"page\">\n";
 
-if (!empty($HTTP_GET_VARS["page"])) {
-  $target_cfg_file = $HTTP_GET_VARS["page"];
+if (!empty($_GET["page"])) {
+  $target_cfg_file = $_GET["page"];
   $matches = preg_split("/\./", $target_cfg_file);
   $target_directory = $matches[0];
 } 
 
-if (!empty($HTTP_GET_VARS["debug"])) {
+if (!empty($_GET["debug"])) {
   $debug = true;
 } else {
   $debug = false;
 }
 
-if (!empty($HTTP_GET_VARS["target"])) {
-  $target = $HTTP_GET_VARS["target"];
+if (!empty($_GET["target"])) {
+  $target = $_GET["target"];
   // --- style parameter
-  if (!empty($HTTP_GET_VARS["style"])) {
-    $style = $HTTP_GET_VARS["style"];
+  if (!empty($_GET["style"])) {
+    $style = $_GET["style"];
   } else {
     $style = $cfg->graphstyle;
   }
@@ -116,16 +116,16 @@ if (!empty($HTTP_GET_VARS["target"])) {
 			     $type,
 			     $style
 			     );
-      if (!empty($HTTP_GET_VARS[$type])) {
-	$gr[$type]->limit = $HTTP_GET_VARS[$type];
+      if (!empty($_GET[$type])) {
+	$gr[$type]->limit = $_GET[$type];
       }
-      if (!empty($HTTP_GET_VARS["nopk".$type])) {
-	$gr[$type]->nopeaks = $HTTP_GET_VARS["nopk".$type];
+      if (!empty($_GET["nopk".$type])) {
+	$gr[$type]->nopeaks = $_GET["nopk".$type];
       }
 
       // --- graph parameter
-      if (!empty($HTTP_GET_VARS["graph"])) {
-	$gr[$type]->set_period($HTTP_GET_VARS["graph"]);
+      if (!empty($_GET["graph"])) {
+	$gr[$type]->set_period($_GET["graph"]);
       }
 
       print "<a name=\"".$type."\"></a>\n";
@@ -152,8 +152,8 @@ if (!empty($HTTP_GET_VARS["target"])) {
 	$gr[$type]->set_summary(true);
 
 	// --- graph parameter
-	if (!empty($HTTP_GET_VARS["graph"])) {
-	  $gr[$type]->set_period($HTTP_GET_VARS["graph"]);
+	if (!empty($_GET["graph"])) {
+	  $gr[$type]->set_period($_GET["graph"]);
 	}
       }
 
@@ -168,7 +168,7 @@ if (!empty($HTTP_GET_VARS["target"])) {
 
       // --- insert some useful data (table)
       print "<td>\n";
-      $reqstr = $cfg->buildRequestString("target", $target["name"], $HTTP_GET_VARS);
+      $reqstr = $cfg->buildRequestString("target", $target["name"], $_GET);
       if ( !empty($target["envtitle"]["SUBTITLE"]) ) {
 	print "<h3><a href=\"grapherrd.php?$reqstr\">".$target["env"][$first]["SUBTITLE"]."</a></h3>\n";
       } else {
@@ -217,8 +217,8 @@ if (!empty($HTTP_GET_VARS["target"])) {
     }
     print "</table>\n";
   }
-} elseif (!empty($HTTP_GET_VARS["page"])) {
-  $target_cfg_file = $HTTP_GET_VARS["page"];
+} elseif (!empty($_GET["page"])) {
+  $target_cfg_file = $_GET["page"];
   print "<h1>".$cfg->files[$target_cfg_file]." graphs</h1>";
 }
 

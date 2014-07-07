@@ -38,7 +38,7 @@ $starttime = $mtime;
 require("config.php");
 $cfg = new config("grapherrd.cfg", "graph.cfg");
 
-print "<title>".$cfg->files[$HTTP_GET_VARS["page"]]." from ".$cfg->title." - "."</title>\n";
+print "<title>".$cfg->files[$_GET["page"]]." from ".$cfg->title." - "."</title>\n";
 foreach ($cfg->css as $key => $css) {
   print "<link href=\"".$css."\" rel=\"stylesheet\" type=\"text/css\" />\n";
 }

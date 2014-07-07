@@ -377,10 +377,10 @@ class graph
     $this->style = $s;
 
     if ($this->style == "normal") {
-      $this->width = 400;
+      $this->width = 440;
       $this->height = 100;
     } elseif ($this->style == "tall") {
-      $this->width = 400;
+      $this->width = 440;
       $this->height = 200;
     } elseif ($this->style == "long") {
       $this->width = 530;
@@ -462,9 +462,9 @@ class graph
     //    }
 
     // --- Average values
-    $rrd_cmd .= " DEF:in=".$this->file.":ds0:AVERAGE";
+    $rrd_cmd .= " DEF:in='".$this->file.":ds0':AVERAGE";
     if ($this->nb_val == 2) {
-      $rrd_cmd .= " DEF:out=".$this->file.":ds1:AVERAGE";
+      $rrd_cmd .= " DEF:out='".$this->file.":ds1':AVERAGE";
     }
     $rrd_cmd .= " CDEF:fin=in,".$this->var_mult_1.",*";
     if ($this->nb_val == 2) {
@@ -478,9 +478,9 @@ class graph
     }
 
     // --- Max values
-    $rrd_cmd .= " DEF:min=".$this->file.":ds0:MAX";
+    $rrd_cmd .= " DEF:min='".$this->file.":ds0':MAX";
     if ($this->nb_val == 2) {
-      $rrd_cmd .= " DEF:mout=".$this->file.":ds1:MAX";
+      $rrd_cmd .= " DEF:mout='".$this->file.":ds1':MAX";
     }
     $rrd_cmd .= " CDEF:fmin=min,".$this->var_mult_1.",*";
     if ($this->nb_val == 2) {
@@ -496,16 +496,17 @@ class graph
     // --- drawing commands : normal
     if ($this->max_cc) {
       // --- change color when over limit
-      $rrd_cmd .= " AREA:fin#".$this->val_col_3.":";
+      $rrd_cmd .= " AREA:fin#".$this->val_col_3.":'";
       if (!$this->summary) {
 	$rrd_cmd .= $this->leg_str_3;
       } else {
 	$rrd_cmd .= $this->leg_str_3s;
       }
+      $rrd_cmd .= "'";
       // then draw only limited traffic
-      $rrd_cmd .= " AREA:finlim#".$this->val_col_1.":";
+      $rrd_cmd .= " AREA:finlim#".$this->val_col_1.":'";
     } else {
-      $rrd_cmd .= " AREA:fin#".$this->val_col_1.":";
+      $rrd_cmd .= " AREA:fin#".$this->val_col_1.":'";
     }
     if (!$this->summary) {
       $rrd_cmd .= $this->leg_str_1;
@@ -513,7 +514,7 @@ class graph
       $rrd_cmd .= $this->leg_str_1s;
     }
     if ($this->nb_val == 2) {
-      $rrd_cmd .= " LINE1:fout#".$this->val_col_2.":";
+      $rrd_cmd .= "' LINE1:fout#".$this->val_col_2.":'";
       if (!$this->summary) {
 	$rrd_cmd .= $this->leg_str_2;
       } else {
@@ -523,32 +524,32 @@ class graph
 
     // --- drawing commands : max
     if (($this->max != "") && ($this->max_str1 != "")) {
-      $rrd_cmd .= " HRULE:".$this->max."#ff0000:";
+      $rrd_cmd .= "' HRULE:'".$this->max."'#ff0000:'";
       if (!$this->summary) {
 	$rrd_cmd .= $this->max_str1;
 	if ($this->max_str2 != "") {
 	  $rrd_cmd .= $this->nb_format($this->max).$this->max_str2;
 	}
+      } else {
+        $rrd_cmd .= "Max";
       }
     }
-    if (!$this->summary) {
-      $rrd_cmd .= "\\\l";
-    }
+    $rrd_cmd .= "\l'";
 
     // --- drawing commands : peaks
     if (!$this->nopeaks && ($this->period != "daily")) {
       // --- change color when over limit
       if ($this->max_cc) {
-	$rrd_cmd .= " LINE1:fmin#".$this->val_col_3p.":";
+	$rrd_cmd .= " LINE1:fmin#".$this->val_col_3p.":'";
 	if (!$this->summary) {
 	  $rrd_cmd .= $this->leg_str_3p;
 	} else {
 	  $rrd_cmd .= $this->leg_str_3ps;
 	}
 	// then draw only limited traffic
-	$rrd_cmd .= " LINE1:fminlim#".$this->val_col_1p.":";
+	$rrd_cmd .= "' LINE1:fminlim#".$this->val_col_1p.":'";
       } else {
-	$rrd_cmd .= " LINE1:fmin#".$this->val_col_1p.":";
+	$rrd_cmd .= " LINE1:fmin#".$this->val_col_1p.":'";
       }
       if (!$this->summary) {
 	$rrd_cmd .= $this->leg_str_1p;
@@ -556,16 +557,14 @@ class graph
 	$rrd_cmd .= $this->leg_str_1ps;
       }
       if ($this->nb_val == 2) {
-	$rrd_cmd .= " LINE1:fmout#".$this->val_col_2p.":";
+	$rrd_cmd .= "' LINE1:fmout#".$this->val_col_2p.":'";
 	if (!$this->summary) {
 	  $rrd_cmd .= $this->leg_str_2p;
 	} else {
 	  $rrd_cmd .= $this->leg_str_2ps;
 	}
       }
-      if (!$this->summary) {
-	$rrd_cmd .="\\\l";
-      }
+      $rrd_cmd .= "\l'";
     }
 
     // --- value lines writing
@@ -574,31 +573,31 @@ class graph
 	// -- over values
        	$rrd_cmd .= " CDEF:finover=fin,finlim,-";
        	$rrd_cmd .= " CDEF:fminover=fmin,fminlim,-";
-	$rrd_cmd .= " GPRINT:fminover:MAX:".$this->val_str_3."\ Max\ ".$this->val_fmt_3;
-	$rrd_cmd .= " GPRINT:finover:AVERAGE:-\ \ Avg\ ".$this->val_fmt_3;
-	$rrd_cmd .= " GPRINT:finover:LAST:-\ \ Last\ ".$this->val_fmt_3;
-	$rrd_cmd .= "\\\l";
+	$rrd_cmd .= " GPRINT:fminover:MAX:'".$this->val_str_3." Max ".$this->val_fmt_3."'";
+	$rrd_cmd .= " GPRINT:finover:AVERAGE:'- Avg ".$this->val_fmt_3."'";
+	$rrd_cmd .= " GPRINT:finover:LAST:'- Last ".$this->val_fmt_3;
+	$rrd_cmd .= "\l'";
 
 	// -- normal values
 	if ($this->calc_pc_1) {
 	  $rrd_cmd .= " CDEF:pcin=finlim,100,*,".$this->max.",/";
 	  $rrd_cmd .= " CDEF:mpcin=fminlim,100,*,".$this->max.",/";
 	}
-	$rrd_cmd .= " GPRINT:fminlim:MAX:".$this->val_str_1."\ Max\ ".$this->val_fmt_1;
+	$rrd_cmd .= " GPRINT:fminlim:MAX:'".$this->val_str_1." Max ".$this->val_fmt_1;
 	if ($this->calc_pc_1) {
-	  $rrd_cmd .= " GPRINT:mpcin:MAX:".$this->pc_str_1;
+	  $rrd_cmd .= "' GPRINT:mpcin:MAX:'".$this->pc_str_1;
 	} elseif ($this->pc_str_1 != "") {
 	  $rrd_cmd .= $this->pc_str_1;
 	}
-	$rrd_cmd .= " GPRINT:finlim:AVERAGE:-\ \ Avg\ ".$this->val_fmt_1;
+	$rrd_cmd .= "' GPRINT:finlim:AVERAGE:'- Avg ".$this->val_fmt_1;
 	if ($this->calc_pc_1) {
-	  $rrd_cmd .= " GPRINT:mpcin:AVERAGE:".$this->pc_str_1;
+	  $rrd_cmd .= "' GPRINT:mpcin:AVERAGE:'".$this->pc_str_1;
 	} elseif ($this->pc_str_1 != "") {
 	  $rrd_cmd .= $this->pc_str_1;
 	}
-	$rrd_cmd .= " GPRINT:finlim:LAST:-\ \ Last\ ".$this->val_fmt_1;
+	$rrd_cmd .= "' GPRINT:finlim:LAST:'- Last ".$this->val_fmt_1;
 	if ($this->calc_pc_1) {
-	  $rrd_cmd .= " GPRINT:mpcin:LAST:".$this->pc_str_1;
+	  $rrd_cmd .= "' GPRINT:mpcin:LAST:'".$this->pc_str_1;
 	} elseif ($this->pc_str_1 != "") {
 	  $rrd_cmd .= $this->pc_str_1;
 	}
@@ -608,21 +607,21 @@ class graph
 	  $rrd_cmd .= " CDEF:pcin=fin,100,*,".$this->max.",/";
 	  $rrd_cmd .= " CDEF:mpcin=fmin,100,*,".$this->max.",/";
 	}
-	$rrd_cmd .= " GPRINT:fmin:MAX:".$this->val_str_1."\ Max\ ".$this->val_fmt_1;
+	$rrd_cmd .= " GPRINT:fmin:MAX:'".$this->val_str_1." Max ".$this->val_fmt_1;
 	if ($this->calc_pc_1) {
-	  $rrd_cmd .= " GPRINT:mpcin:MAX:".$this->pc_str_1;
+	  $rrd_cmd .= "' GPRINT:mpcin:MAX:'".$this->pc_str_1;
 	} elseif ($this->pc_str_1 != "") {
 	  $rrd_cmd .= $this->pc_str_1;
 	}
-	$rrd_cmd .= " GPRINT:fin:AVERAGE:-\ \ Avg\ ".$this->val_fmt_1;
+	$rrd_cmd .= "' GPRINT:fin:AVERAGE:'- Avg ".$this->val_fmt_1;
 	if ($this->calc_pc_1) {
-	  $rrd_cmd .= " GPRINT:mpcin:AVERAGE:".$this->pc_str_1;
+	  $rrd_cmd .= "' GPRINT:mpcin:AVERAGE:'".$this->pc_str_1;
 	} elseif ($this->pc_str_1 != "") {
 	  $rrd_cmd .= $this->pc_str_1;
 	}
-	$rrd_cmd .= " GPRINT:fin:LAST:-\ \ Last\ ".$this->val_fmt_1;
+	$rrd_cmd .= "' GPRINT:fin:LAST:'- Last ".$this->val_fmt_1;
 	if ($this->calc_pc_1) {
-	  $rrd_cmd .= " GPRINT:mpcin:LAST:".$this->pc_str_1;
+	  $rrd_cmd .= "' GPRINT:mpcin:LAST:'".$this->pc_str_1;
 	} elseif ($this->pc_str_1 != "") {
 	  $rrd_cmd .= $this->pc_str_1;
 	}
@@ -630,38 +629,43 @@ class graph
 
       // -- second graph values
       if ($this->nb_val == 2) {
-	$rrd_cmd .= "\\\l";
+	$rrd_cmd .= "\l'";
 	if ($this->calc_pc_2) {
 	  $rrd_cmd .= " CDEF:pcout=fout,100,*,".$this->max.",/";
 	  $rrd_cmd .= " CDEF:mpcout=fmout,100,*,".$this->max.",/";
 	}
-	$rrd_cmd .= " GPRINT:fmout:MAX:".$this->val_str_2."\ Max\ ".$this->val_fmt_2;
+	$rrd_cmd .= " GPRINT:fmout:MAX:'".$this->val_str_2." Max ".$this->val_fmt_2;
 	if ($this->calc_pc_2) {
-	  $rrd_cmd .= " GPRINT:mpcout:MAX:".$this->pc_str_2;
+	  $rrd_cmd .= "' GPRINT:mpcout:MAX:'".$this->pc_str_2;
 	} elseif ($this->pc_str_2 != "") {
 	  $rrd_cmd .= $this->pc_str_2;
 	}
-	$rrd_cmd .= " GPRINT:fout:AVERAGE:-\ \ Avg\ ".$this->val_fmt_2;
+	$rrd_cmd .= "' GPRINT:fout:AVERAGE:'- Avg ".$this->val_fmt_2;
 	if ($this->calc_pc_2) {
-	  $rrd_cmd .= " GPRINT:pcout:AVERAGE:".$this->pc_str_2;
+	  $rrd_cmd .= "' GPRINT:pcout:AVERAGE:'".$this->pc_str_2;
 	} elseif ($this->pc_str_2 != "") {
 	  $rrd_cmd .= $this->pc_str_2;
 	}
-	$rrd_cmd .= " GPRINT:fout:LAST:-\ \ Last\ ".$this->val_fmt_2;
+	$rrd_cmd .= "' GPRINT:fout:LAST:'- Last ".$this->val_fmt_2;
 	if ($this->calc_pc_2) {
-	  $rrd_cmd .= " GPRINT:pcout:LAST:".$this->pc_str_2;
+	  $rrd_cmd .= "' GPRINT:pcout:LAST:'".$this->pc_str_2;
 	} elseif ($this->pc_str_2 != "") {
 	  $rrd_cmd .= $this->pc_str_2;
 	}
       }
+      if (!$this->summary) {
+	$rrd_cmd .= "\l'";
+      } else {
+	$rrd_cmd .= "'";
+      }
     } else {
-      $rrd_cmd .= " PRINT:fmin:MAX:%5.1lf\%s";
-      $rrd_cmd .= " PRINT:fin:AVERAGE:%6.1lf\%s";
-      $rrd_cmd .= " PRINT:fin:LAST:%6.1lf\%s";
+      $rrd_cmd .= " PRINT:fmin:MAX:%5.1lf%s";
+      $rrd_cmd .= " PRINT:fin:AVERAGE:%6.1lf%s";
+      $rrd_cmd .= " PRINT:fin:LAST:%6.1lf%s";
       if ($this->nb_val == 2) {
-	$rrd_cmd .= " PRINT:fmout:MAX:%5.1lf\%s";
-	$rrd_cmd .= " PRINT:fout:AVERAGE:%6.1lf\%s";
-	$rrd_cmd .= " PRINT:fout:LAST:%6.1lf\%s";
+	$rrd_cmd .= " PRINT:fmout:MAX:%5.1lf%s";
+	$rrd_cmd .= " PRINT:fout:AVERAGE:%6.1lf%s";
+	$rrd_cmd .= " PRINT:fout:LAST:%6.1lf%s";
       }
     }
 
@@ -727,7 +731,7 @@ class graph
     if ($val == 0) return $val;
 
     if ($fl_graph) {
-      $esc = "\ ";
+      $esc = " ";
     } else {
       $esc = "&nbsp;";
     }
