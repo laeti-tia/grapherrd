@@ -4,11 +4,9 @@ GrapheRRD is a PHP web frontend to MRTG  and  RRD  data  files.   It  draws
 custom graphics from MRTG data and  allows  easy  navigation  amongst  data
 sources.   Graphs  colors,  sizes  and   time   scale   are   customizable.
 
-Source code is under the GPL (see enclosed [LICENSE][license] file).
-
 Requirements
 ------------
-[MRTG][mrtg], [RRD][rrd], [PHP][php].
+[MRTG][mrtg], [RRD][rrd] and [PHP][php].
 
 Installation
 ------------
@@ -16,7 +14,8 @@ Installation should be  quite  straightforward.   The  grapherrd  directory
 contains all the needed PHP scripts.  You should copy it  to  any  of  your
 HTTP PHP enabled server.
 
-The snmpd-helper directory contains bash scripts to be run  from  snmpd  to
+### snmpd-helpers
+The `snmpd-helpers` directory contains bash scripts to be run from snmpd to
 collect services statistics and make them available to MRTG.   Scripts  are
 provided for the following services:
 - DB (mysql)
@@ -25,8 +24,9 @@ provided for the following services:
 - HTTP (apache)
 - NNTP (INN)
 - SMTP (postfix)
+- and various other.
 
-See also the provided example/snmpd.conf file  to  see  how  to  use  those
+See also the provided `example/snmpd.conf` file to see  how  to  use  those
 scripts.
 
 This directory is actually a git submodule,  the  original  is  located  at
@@ -74,13 +74,19 @@ file.
 
 Acknowledgements
 ----------------
-Thanks to [BELNET][belnet] for having made this work  opensource
-software.
+Thanks to [BELNET][belnet] for having made this work  opensource software.
+
+Copyright and License
+---------------------
+© 2001-2014 — Antoine Delvaux — All rights reserved.
+
+See enclosed [LICENSE][license] file.
 
 [belnet]: http://www.belnet.be
 [license]: https://github.com/tonin/grapherrd/blob/master/LICENSE
 [mrtg]: http://mrtg.org
 [rrd]: http://rrdtool.org
 [php]: http://php.net
+
 
 /* vim: set expandtab textwidth=75: */
