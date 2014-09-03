@@ -34,7 +34,7 @@
 class config 
 {
   //---Constants
-  var $version = "0.9.7 (07/2014)";
+  var $version = "0.9.8-0.snap (09/2014)";
 
   //---Properties
   // Configuration parameters

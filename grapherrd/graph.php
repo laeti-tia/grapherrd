@@ -722,10 +722,11 @@ class graph
    * Type:	private
    * Arguments: the value to be formated
    *		a flag set if the string must be used inside a graph
+   *		a flag set if the value uses the IEC binary prefix
    * Returns:   the formated string
    **********************************************************************/ 
 
-  function nb_format($val, $fl_graph = true) {
+  function nb_format($val, $fl_graph = true, $binary = false) {
     $sufx = "";
 
     if ($val == 0) return $val;
@@ -736,23 +737,48 @@ class graph
       $esc = "&nbsp;";
     }
 
-    if ($val > 1000000000) {
-      $val /= 1000000000;
+    if ($binary) {
+      $unit = 1024;
+    } else {
+      $unit = 1000;
+    }
+
+    if ($val > pow($unit, 8)) {
+      $val /= pow($unit, 8);
+      $sufx = $esc."Y";
+    } elseif ($val > pow($unit, 7)) {
+      $val /= pow($unit, 7);
+      $sufx = $esc."Z";
+    } elseif ($val > pow($unit, 6)) {
+      $val /= pow($unit, 6);
+      $sufx = $esc."E";
+    } elseif ($val > pow($unit, 5)) {
+      $val /= pow($unit, 5);
+      $sufx = $esc."P";
+    } elseif ($val > pow($unit, 4)) {
+      $val /= pow($unit, 4);
+      $sufx = $esc."T";
+    } elseif ($val > pow($unit, 3)) {
+      $val /= pow($unit, 3);
       $sufx = $esc."G";
-    } elseif ($val > 1000000) {
-      $val /= 1000000;
+    } elseif ($val > pow($unit, 2)) {
+      $val /= pow($unit, 2);
       $sufx = $esc."M";
-    } elseif ($val > 1000) {
-      $val /= 1000;
-      $sufx = $esc."k";
+    } elseif ($val > $unit) {
+      $val /= $unit;
+      if ($binary) {
+	$sufx = $esc."K";
+      } else {
+	$sufx = $esc."k";
+      }
     } else {
       $sufx = $esc;
     }
 
     if (intval($val) == $val) {
-      return sprintf ("%.0f%s",$val,$sufx);
+      return sprintf("%.0f%s", $val, $sufx);
     } else {
-      return sprintf ("%.1f%s",$val,$sufx);
+      return sprintf("%.1f%s", $val, $sufx);
     }
   }
 
@@ -770,7 +796,11 @@ class graph
       // --- no max
       $bandwidth_str = "-";
     } else {
-      $bandwidth_str = $this->nb_format($this->max, false).$this->leg_tab;
+      if (strpos($this->leg_tab, 'i') === 0) {
+	$bandwidth_str = $this->nb_format($this->max, false, true).$this->leg_tab;
+      } else {
+	$bandwidth_str = $this->nb_format($this->max, false, false).$this->leg_tab;
+      }
     }
     return $bandwidth_str;
   }
