@@ -80,7 +80,7 @@ class config
 	  $this->files[$parameters[0]] = trim($parameters[1]);
 	} elseif ($parameters[0] == "rrdtool_path") {
 	  $this->rrdpath = trim($parameters[1]);
-	} elseif ($parameters[0] == "cfgfiles_paths") {
+	} elseif ($parameters[0] == "cfgfiles_path") {
 	  $parameters = preg_split("/\s+/", $parameters[1]);
 	  for ($i=0;$i<count($parameters)-1;$i++) {
 	    $this->paths[$i] = trim($parameters[$i]);

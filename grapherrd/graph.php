@@ -117,7 +117,7 @@ class graph
    * Returns:		the object
    **********************************************************************/ 
 
-  function graph($cfg, $trgt, $debug = false, $trgt_dir = "", $type = "default", $style = "normal", $period = "daily", $pk = false) {
+  function graph($cfg, $trgt, $debug = false, $trgt_dir = "", $type = "default", $style = "long", $period = "daily", $pk = false) {
 
     // --- set global vars
     $this->rrdpath = $cfg->rrdpath;
@@ -134,7 +134,11 @@ class graph
       $this->title = $cfg->targets[$trgt]["env"]["default"]["SUBTITLE"];
     }
     $this->debug = $debug;
-    $this->root_path = str_replace("//", "/", $cfg->graph_root_path."/");
+    if (!empty($cfg->graph_root_path)) {
+        $this->root_path = str_replace("//", "/", $cfg->graph_root_path."/");
+    } else {
+        $this->root_path = dirname($_SERVER["SCRIPT_FILENAME"]);
+    }
     $up = $cfg->graph_url_path."/".$trgt_dir."/";
     $this->url_path = str_replace("//", "/", $up);
     $this->set_type($type, $cfg);
@@ -373,7 +377,7 @@ class graph
    * Returns:     true if succeed
    **********************************************************************/ 
 
-  function set_style($s = "normal") {
+  function set_style($s = "long") {
     $this->style = $s;
 
     if ($this->style == "normal") {

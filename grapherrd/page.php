@@ -53,18 +53,19 @@ if (!empty($_GET["target"])) {
     // --- unique target graph
 
     // --- print the title and the index
-    print "<h1>".$cfg->targets[$target]["title"]." graphs</h1>\n";
+    print "<a name=\"top\"></a><h2>".$cfg->targets[$target]["title"]." graphs</h2>\n";
     if (!empty($cfg->targets[$target]["rrd"])) {
-      print "<p id=\"pageindex\">- ";
+      print "<ul id=\"pageindex\">";
+      print "<li><a href=\"#top\">To page top</a></br>&nbsp;</li>";
       foreach ($cfg->targets[$target]["rrd"] as $type => $rrd) {
 	foreach ($cfg->t_name as $ct => $name) {
 	  if (preg_match("/^".$ct."/", $type)) {
 	    $cfg_type = $ct;
 	  }
 	}
-	print "<a href=\"#".$type."\">".htmlspecialchars(str_replace("\\","",$cfg->t_name[$cfg_type]))."</a> - ";
+	print "<li><a href=\"#".$type."\">".htmlspecialchars(str_replace("\\","",$cfg->t_name[$cfg_type]))."</a></li>";
       }
-      print "</p>\n";
+      print "</ul>\n";
     }
 
     // --- data from MRTG cfg file
@@ -135,7 +136,7 @@ if (!empty($_GET["target"])) {
   } else {
     // --- summary graphs
 
-    print "<h1>Summary graphs</h1>\n";
+    print "<h2>Summary graphs</h2>\n";
     print "<table class=\"graph\">\n";
 
     foreach ($cfg->targets as $key => $target) {
@@ -219,7 +220,7 @@ if (!empty($_GET["target"])) {
   }
 } elseif (!empty($_GET["page"])) {
   $target_cfg_file = $_GET["page"];
-  print "<h1>".$cfg->files[$target_cfg_file]." graphs</h1>";
+  print "<h2>".$cfg->files[$target_cfg_file]." graphs</h2>";
 }
 
 print "</div>\n";

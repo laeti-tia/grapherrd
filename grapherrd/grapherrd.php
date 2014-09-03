@@ -22,12 +22,13 @@
  * This file is the main.
  * It's building the HTML layout and calling other HTML subsections.
  ******************************************************************************/
+header("Cache-Control: max-age=300, public");
+header("Content-Type: text/html; charset=UTF-8");
 print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <?PHP
 // to compute running time
 $mtime = microtime();
@@ -74,7 +75,7 @@ $endtime = $mtime;
 $totaltime = ($endtime - $starttime);
 print "<a href=\"http://validator.w3.org/check/referer\"><img style=\"border:0;float:left;\" src=\"images/valid-xhtml10.png\" alt=\"Valid XHTML 1.0!\" /></a>\n";
 print "<a href=\"http://jigsaw.w3.org/css-validator/check/referer\"><img style=\"border:0;float:right;\" src=\"images/vcss.png\" alt=\"Valid CSS!\" /></a>\n";
-printf ("<p>%s<br />\nPage created in %.3f seconds by <em>grapherrd</em> %s.</p>\n", $cfg->footer, $totaltime, $cfg->version);
+printf ("<p>%s<br />\nPage created in %.3f seconds by <em>grapherrd</em> %s on %s.</p>\n", $cfg->footer, $totaltime, $cfg->version, date('l jS \of F Y H:i:s'));
 print "</div>";
 
 ?>

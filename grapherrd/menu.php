@@ -47,7 +47,7 @@ $target = $_GET["target"];
 
 
 // ---  Time scale
-print "<h2>Time scale</h2>\n";
+print "<h3>Time scale</h3>\n";
 print "<ul>\n";
 $links = array (
 		"daily" => "Daily",
@@ -75,7 +75,7 @@ print "</ul>\n";
 // --- MRTG Files or Targets inside an MRTG file
 if (empty($_GET["page"])) {
   // -- No MRTG file is selected
-  print "<h2>Pages</h2>\n";
+  print "<h3>Pages</h3>\n";
   print "<ul>\n";
   foreach ($cfg->files as $key => $file) {
     $reqstr = $cfg->buildRequestString("page", $key, $_GET);
@@ -85,7 +85,7 @@ if (empty($_GET["page"])) {
 } else {
   // -- An MRTG file is selected
   $reqstr = $cfg->buildRequestString("menu", "", $_GET);
-  print "<h2><a href=\"grapherrd.php?$reqstr\">".$cfg->files[$_GET["page"]]."</a></h2>\n";
+  print "<h3><a href=\"grapherrd.php?$reqstr\">".$cfg->files[$_GET["page"]]."</a></h3>\n";
   if ($read_cfg) {
     print "<ul>\n";
     foreach ($cfg->targets as $key => $target) {
@@ -122,15 +122,12 @@ if (empty($_GET["page"])) {
 $target = $_GET["target"];
 
 // --- Sizes
-print "<h2>Sizes</h2>\n";
+print "<h3>Sizes</h3>\n";
 print "<ul>\n";
 $links = array (
-		"normal"	=> "Normal&nbsp;(640x480)",
-		"tall"		=> "Tall",
-		"long"		=> "Long",
-		"big"		=> "Big&nbsp;(800x600)",
-		"extralong"	=> "Extralong",
-		"huge"		=> "Huge&nbsp;(1280x1024)"
+		"long"		=> "Normal",
+		"extralong"	=> "Long",
+		"huge"		=> "Big"
 		);
 foreach ($links as $key => $link_name) {
   $reqstr = $cfg->buildRequestString("style", $key, $_GET);
@@ -151,7 +148,7 @@ print "</ul>\n";
 // --- Peaks & Limits
 if (!empty($_GET["target"])) {
   if ($_GET["target"]!="summary") {
-    print "<h2>Peaks &amp;<br />Vertical Scales</h2>\n";
+    print "<h3>Peaks &amp;<br />Vertical Scales</h3>\n";
     print "<form action=\"grapherrd.php\" method=\"get\">\n";
     print "<div>";
     foreach ($_GET as $key => $value) {
@@ -163,7 +160,7 @@ if (!empty($_GET["target"])) {
     }
     print "</div>";
     print "<table class=\"menu\">\n";
-    print "<tr><th class=\"top\">graph</th><th class=\"top\">scale</th><th class=\"top\">no pk</th></tr>\n";
+    print "<tr><th class=\"top\" id=\"th_graph\">graph</th><th class=\"top\">scale</th><th class=\"top\">no pk</th></tr>\n";
     if (!empty($cfg->targets[$target]["rrd"])) {
       foreach ($cfg->targets[$target]["rrd"] as $type => $rrd) {
 	// look for a reduced match on the begining of the string type
@@ -187,8 +184,8 @@ if (!empty($_GET["target"])) {
   }
 }
 
-print "<h2>Preferences</h2>\n";
-print "<p>If you want to have your browser remember the graph and size parameters, click on the wanted links and fill the various fields above. Then bookmark the resulting page.</p>\n";
+print "<h3>Preferences</h3>\n";
+print "<p class=\"menu\">If you want to have your browser remember the graph and size parameters, click on the wanted links and fill the various fields above. Then bookmark the resulting page.</p>\n";
 
 print $cfg->menu_footer;
 print "\n</div>\n";

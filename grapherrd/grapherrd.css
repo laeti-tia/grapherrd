@@ -37,7 +37,7 @@ h1 {
   text-align: center;
   margin-top: 0;
 }
-h2 {
+h3 {
   margin: 1em 0 0.2em 0;
 }
 #menu ul {
@@ -51,16 +51,27 @@ table.menu {
 th.top, table.summary th.top {
   text-align: center;
 }
-td.first {
+td.first, #th_graph {
   text-align: right;
+}
+p.menu {
+  padding: .5em;
 }
 
 /* Graph pages */
+h2 {
+  text-align: center;
+  margin-top: 0;
+  padding-right: 150px;
+}
 #page {
   float: right; 
   width: 83%;
   text-align: center;
   font-size: small;
+}
+#page img {
+  padding-right: 150px;
 }
 
 /* Summary pages */
@@ -80,15 +91,28 @@ table.summary th {
 table.summary td {
   text-align: left;
 }
-p.summary, p#pageindex {
+p.summary {
   font: x-small monospace;
   white-space: pre;
   margin: 0;
   padding: 0;
 }
-
+ul#pageindex {
+  font: xx-small;
+  text-align: right;
+  direction: RTL;
+  position: fixed;
+  top: 1em;
+  right: 2em;
+  margin: 0;
+  padding: 0;
+  opacity: 0.6;
+}
 li#summary {
   padding-top: 1em;
+}
+#page table.graph img {
+  padding-right: 0px;
 }
 
 /* Webforms */
