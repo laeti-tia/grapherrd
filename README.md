@@ -77,10 +77,10 @@ Acknowledgements
 Thanks to [BELNET][belnet] for having made this work  opensource
 software.
 
-[belnet] http://www.belnet.be
-[license] https://github.com/tonin/grapherrd/blob/master/LICENSE
-[mrtg] http://mrtg.org
-[rrd] http://rrdtool.org
-[php] http://php.net
+[belnet]: http://www.belnet.be
+[license]: https://github.com/tonin/grapherrd/blob/master/LICENSE
+[mrtg]: http://mrtg.org
+[rrd]: http://rrdtool.org
+[php]: http://php.net
 
 /* vim: set expandtab textwidth=75: */
