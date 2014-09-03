@@ -26,7 +26,7 @@ provided for the following services:
 - SMTP (postfix)
 - and various other.
 
-See also the provided `example/snmpd.conf` file to see  how  to  use  those
+See also the provided `examples/snmpd.conf` file to see how  to  use  those
 scripts.
 
 This directory is actually a git submodule,  the  original  is  located  at
@@ -54,7 +54,10 @@ Therefore a main target should always be a network interface, or  at  least
 it  will  be  graphed  as  such.   If  no  main  target  is  defined,   the
 characteristics of the first subtarget are used as if it where the main.
 
-See the provided `example/mrtg.conf` file for how to use these settings.
+See the provided `mrtg/mrtg.conf` file for how to use these settings.
+
+MRTG configuration files and RRD data files  should  be  readable  by  your
+web servers or PHP engine.
 
 ### grapherrd.cfg
 The grapherrd.cfg file contains all the settings you can  change  to  adapt
