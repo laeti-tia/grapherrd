@@ -1,0 +1,3 @@
+[submodule "snmpd-helpers"]
+	path = snmpd-helpers
+	url = https://github.com/tonin/snmpd-helpers.git
