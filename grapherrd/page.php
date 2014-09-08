@@ -56,7 +56,7 @@ if (!empty($_GET["target"])) {
     print "<a name=\"top\"></a><h2>".$cfg->targets[$target]["title"]." graphs</h2>\n";
     if (!empty($cfg->targets[$target]["rrd"])) {
       print "<ul id=\"pageindex\">";
-      print "<li><a href=\"#top\">To page top</a></br>&nbsp;</li>";
+      print "<li><a href=\"#top\">To page top</a><br/>&nbsp;</li>";
       foreach ($cfg->targets[$target]["rrd"] as $type => $rrd) {
 	foreach ($cfg->t_name as $ct => $name) {
 	  if (preg_match("/^".$ct."/", $type)) {
