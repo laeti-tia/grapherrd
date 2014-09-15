@@ -67,7 +67,7 @@ include("menu.php");
 include("page.php");
 
 // add footer
-print "<div id=\"footer\">\n";
+print "<div id=\"pagefooter\" class=\"footer\">\n";
 $mtime = microtime();
 $mtime = explode(" ",$mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -76,7 +76,7 @@ $totaltime = ($endtime - $starttime);
 print "<a href=\"http://validator.w3.org/check/referer\"><img style=\"border:0;float:left;\" src=\"images/valid-xhtml10.png\" alt=\"Valid XHTML 1.0!\" /></a>\n";
 print "<a href=\"http://jigsaw.w3.org/css-validator/check/referer\"><img style=\"border:0;float:right;\" src=\"images/vcss.png\" alt=\"Valid CSS!\" /></a>\n";
 printf ("<p>%s<br />Page created in %.3f seconds by <em>grapherrd</em> %s<br />on %s.</p>\n", $cfg->footer, $totaltime, $cfg->version, date('l jS \of F Y H:i:s'));
-print "</div>";
+print "</div>\n";
 
 ?>
 

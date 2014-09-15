@@ -187,7 +187,7 @@ if (!empty($_GET["target"])) {
 print "<h3>Preferences</h3>\n";
 print "<p class=\"menu\">If you want to have your browser remember the graph and size parameters, click on the wanted links and fill the various fields above. Then bookmark the resulting page.</p>\n";
 
-print $cfg->menu_footer;
+print "<p id=\"menufooter\" class=\"footer\">".$cfg->menu_footer."</p>";
 print "\n</div>\n";
 ?>
 

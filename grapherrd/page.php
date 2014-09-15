@@ -26,8 +26,6 @@
  ******************************************************************************/
 require("graph.php");
 
-print "<div id=\"page\">\n";
-
 if (!empty($_GET["page"])) {
   $target_cfg_file = $_GET["page"];
   $matches = preg_split("/\./", $target_cfg_file);
@@ -42,18 +40,22 @@ if (!empty($_GET["debug"])) {
 
 if (!empty($_GET["target"])) {
   $target = $_GET["target"];
-  // --- style parameter
+  // --- style parameter, defines the graphs div width
   if (!empty($_GET["style"])) {
     $style = $_GET["style"];
   } else {
     $style = $cfg->graphstyle;
   }
+  if ($style == 'long') {
+      $width = 800;
+  } else {
+      $width = 1000;
+  }
 
   if ($target != "summary") {
     // --- unique target graph
 
-    // --- print the title and the index
-    print "<a name=\"top\"></a><h2>".$cfg->targets[$target]["title"]." graphs</h2>\n";
+    // --- print the navigation index
     if (!empty($cfg->targets[$target]["rrd"])) {
       print "<ul id=\"pageindex\">";
       print "<li><a href=\"#top\">To page top</a><br/>&nbsp;</li>";
@@ -67,6 +69,11 @@ if (!empty($_GET["target"])) {
       }
       print "</ul>\n";
     }
+
+    // --- print the graphs title
+    print "<div id=\"page\">";
+    print "<div style=\"width: ".$width."px;\">\n";
+    print "<a name=\"top\"></a><h2>".$cfg->targets[$target]["title"]." graphs</h2>\n";
 
     // --- data from MRTG cfg file
     if ($debug) {
@@ -222,7 +229,7 @@ if (!empty($_GET["target"])) {
   $target_cfg_file = $_GET["page"];
   print "<h2>".$cfg->files[$target_cfg_file]." graphs</h2>";
 }
-
-print "</div>\n";
+// --- end of #page div
+print "</div></div>\n";
 
 ?>

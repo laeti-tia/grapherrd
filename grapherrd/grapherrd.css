@@ -4,6 +4,7 @@
 /* Body */
 body {
   font-family: Arial, Geneva, sans-serif;
+  pointer-events: none;
 }
 /* Links */
 a:link {
@@ -32,13 +33,11 @@ h1 a:hover {
   float: left;
   font-size: small;
   text-align: justify;
+  pointer-events: auto;
 }
-h1 {
+h1 { /* main title on the left */
   text-align: center;
   margin-top: 0;
-}
-h3 {
-  margin: 1em 0 0.2em 0;
 }
 #menu ul {
   margin-top: 0;
@@ -59,19 +58,21 @@ p.menu {
 }
 
 /* Graph pages */
-h2 {
+h2 { /* graph title in the middle */
   text-align: center;
-  margin-top: 0;
-  padding-right: 150px;
+  background: #FFFFFF;
+  width: 50%;
+  margin: 0 auto 1em auto;
+}
+h3 { /* menu titles */
+  margin: 1em 0 0.2em 0;
 }
 #page {
-  float: right; 
+  float: left;
   width: 83%;
   text-align: center;
   font-size: small;
-}
-#page img {
-  padding-right: 150px;
+  margin-bottom: 3em;
 }
 
 /* Summary pages */
@@ -83,6 +84,7 @@ table.summary {
   width: 100%;
   margin: 0;
   padding: 0;
+  pointer-events: auto;
 }
 table.summary th {
   text-align: right;
@@ -97,17 +99,6 @@ p.summary {
   margin: 0;
   padding: 0;
 }
-ul#pageindex {
-  font: xx-small;
-  text-align: right;
-  direction: RTL;
-  position: fixed;
-  top: 1em;
-  right: 2em;
-  margin: 0;
-  padding: 0;
-  opacity: 0.6;
-}
 li#summary {
   padding-top: 1em;
 }
@@ -115,25 +106,41 @@ li#summary {
   padding-right: 0px;
 }
 
+/* Right index */
+ul#pageindex {
+  font-size: small;
+  text-align: right;
+  direction: RTL;
+  position: fixed;
+  top: 1em;
+  right: 2em;
+  margin: 0;
+  padding: 0;
+  z-index: -1;
+  pointer-events: auto;
+}
+
 /* Webforms */
 input {
   font-size: x-small;
 }
 
-/* Footer */
-#menufooter {
+/* Footers */
+.footer {
   text-align: center; 
-  padding-top: 2em;
+  border-top: dotted 1px;
+  border-bottom: dotted 1px;
+  padding: 1em;
+  margin-top: 2em;
 }
-#footer {
+#pagefooter {
+  width: 70em;
   clear: both;
-  width: 50em;
-  text-align: center; 
-  padding-top: 5em;
   margin-left: auto;
   margin-right: auto;
   font-size: small;
+  pointer-events: auto;
 }
-#footer p {
+.footer p {
   margin: 0;
 }
