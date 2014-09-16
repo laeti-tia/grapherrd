@@ -30,7 +30,7 @@ print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <?PHP
-// to compute running time
+// to compute running time, it is then used in the footer at the end of page.php
 $mtime = microtime();
 $mtime = explode(" ",$mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -65,18 +65,6 @@ print "</div>\n";
 // include the grapherrd needed elements
 include("menu.php");
 include("page.php");
-
-// add footer
-print "<div id=\"pagefooter\" class=\"footer\">\n";
-$mtime = microtime();
-$mtime = explode(" ",$mtime);
-$mtime = $mtime[1] + $mtime[0];
-$endtime = $mtime;
-$totaltime = ($endtime - $starttime);
-print "<a href=\"http://validator.w3.org/check/referer\"><img style=\"border:0;float:left;\" src=\"images/valid-xhtml10.png\" alt=\"Valid XHTML 1.0!\" /></a>\n";
-print "<a href=\"http://jigsaw.w3.org/css-validator/check/referer\"><img style=\"border:0;float:right;\" src=\"images/vcss.png\" alt=\"Valid CSS!\" /></a>\n";
-printf ("<p>%s<br />Page created in %.3f seconds by <em>grapherrd</em> %s<br />on %s.</p>\n", $cfg->footer, $totaltime, $cfg->version, date('l jS \of F Y H:i:s'));
-print "</div>\n";
 
 ?>
 

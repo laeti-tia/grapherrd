@@ -4,7 +4,6 @@
 /* Body */
 body {
   font-family: Arial, Geneva, sans-serif;
-  pointer-events: none;
 }
 /* Links */
 a:link {
@@ -33,7 +32,7 @@ h1 a:hover {
   float: left;
   font-size: small;
   text-align: justify;
-  pointer-events: auto;
+  background: #FFFFFF;
 }
 h1 { /* main title on the left */
   text-align: center;
@@ -47,7 +46,7 @@ table.menu {
   margin: 0 0 1em 0;
   padding: 0;
 }
-th.top, table.summary th.top {
+th.top, table.summary th.top, td {
   text-align: center;
 }
 td.first, #th_graph {
@@ -68,11 +67,23 @@ h3 { /* menu titles */
   margin: 1em 0 0.2em 0;
 }
 #page {
+  position: relative;
   float: left;
   width: 83%;
   text-align: center;
   font-size: small;
   margin-bottom: 3em;
+  background: #FFFFFF;
+}
+#graphs {
+  /* we need position absolute to put the graphs on top of pageindex */
+  /* no need for z-index if we keep the pageindex before the #graphs div */
+  position: absolute;
+  pointer-events: none;
+}
+img {
+  /* we re-activate pointer-events to have the double tap working on iOS */
+  pointer-events: auto;
 }
 
 /* Summary pages */
@@ -84,7 +95,6 @@ table.summary {
   width: 100%;
   margin: 0;
   padding: 0;
-  pointer-events: auto;
 }
 table.summary th {
   text-align: right;
@@ -136,10 +146,8 @@ input {
 #pagefooter {
   width: 70em;
   clear: both;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: small;
-  pointer-events: auto;
+  margin: 4em auto 2em auto;
+  font-size: x-small;
 }
 .footer p {
   margin: 0;

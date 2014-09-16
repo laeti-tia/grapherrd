@@ -72,7 +72,7 @@ if (!empty($_GET["target"])) {
 
     // --- print the graphs title
     print "<div id=\"page\">";
-    print "<div style=\"width: ".$width."px;\">\n";
+    print "<div id=\"graphs\" style=\"width: ".$width."px;\">\n";
     print "<a name=\"top\"></a><h2>".$cfg->targets[$target]["title"]." graphs</h2>\n";
 
     // --- data from MRTG cfg file
@@ -229,6 +229,19 @@ if (!empty($_GET["target"])) {
   $target_cfg_file = $_GET["page"];
   print "<h2>".$cfg->files[$target_cfg_file]." graphs</h2>";
 }
+
+// add footer
+print "<div id=\"pagefooter\" class=\"footer\">\n";
+$mtime = microtime();
+$mtime = explode(" ",$mtime);
+$mtime = $mtime[1] + $mtime[0];
+$endtime = $mtime;
+$totaltime = ($endtime - $starttime);
+print "<a href=\"http://validator.w3.org/check/referer\"><img style=\"border:0;float:left;\" src=\"images/valid-xhtml10.png\" alt=\"Valid XHTML 1.0!\" /></a>\n";
+print "<a href=\"http://jigsaw.w3.org/css-validator/check/referer\"><img style=\"border:0;float:right;\" src=\"images/vcss.png\" alt=\"Valid CSS!\" /></a>\n";
+printf ("<p>%s<br />Page created in %.3f seconds by <em>grapherrd</em> %s<br />on %s.</p>\n", $cfg->footer, $totaltime, $cfg->version, date('l jS \of F Y H:i:s'));
+print "</div>\n";
+
 // --- end of #page div
 print "</div></div>\n";
 
