@@ -1,3 +1,5 @@
+This software is now unmaintained, use at your own risk.
+
 GrapheRRD
 =========
 GrapheRRD is a PHP web frontend to MRTG  and  RRD  data  files.   It  draws
